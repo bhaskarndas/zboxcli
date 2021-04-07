@@ -832,3 +832,15 @@ Failed to get read pool info: error requesting read pool info: consensus_failed:
 
 This can happen if read pool is not yet created for wallet. Read pool is usually created when new wallet is created by `zbox` or `zwallet`.
 However, if wallet is created through `zwallet recoverwallet`, read pool may not have been created. Simply run `zbox rp-create`
+
+2. `download` command throwing error
+```
+./zbox download --authticket [authticket] --allocation [allocationid] --remotepath /myfiles/sample2.txt --localpath /.zcn/downloads
+ 0 / 7 [-----------------------------------------------------------------------------------------------------------------]   0.00% 4s
+Error in file operation: File content didn't match with uploaded file
+```
+This can happen if the read pool allocation has not been locked. Once the allocation within the read pool has been locked `download` command will not throw error
+```
+./zbox rp-lock --allocation 2a9c289941c91fab8be64b4648b45fc896612479341ac49af8432b761395df5e --duration 24h --tokens 8
+locked
+```
